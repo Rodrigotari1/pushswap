@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:01:39 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/06 23:17:11 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/07 00:05:20 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,4 +141,4 @@ void	sort_large_stack(t_stacks *data)
 	}
 	if (data->b_size)
 		push_element("pa", data);
-} 
+}
