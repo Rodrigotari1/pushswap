@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:26 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/06 22:44:53 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/08 20:25:50 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		check_duplicates_and_sort(t_stacks *data, int flag);
 int			is_stack_sorted(t_stacks *data);
 int			string_to_int(const char *str, t_stacks *data);
 int			get_max_number(int *stack, int size);
-void		sort_large_stack(t_stacks *data);
+void		bucket_sort(t_stacks *data);
 int			get_min_position(int *stack, int size);
 int			get_max_position(int *stack, int size);
 void		rotate_to_position(t_stacks *data, int pos);
@@ -52,5 +52,7 @@ void		move_forward(int *array, int count);
 void		move_backward(int *array, int count);
 int			get_min_value(int *stack, int size);
 int			get_max_value(int *stack, int size);
+void		join_args(char **args, int i, t_stacks *data);
+void		handle_sorting(t_stacks *data);
 
 #endif

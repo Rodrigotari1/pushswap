@@ -6,7 +6,7 @@
 #    By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/30 19:02:38 by rodrigo           #+#    #+#              #
-#    Updated: 2025/01/06 23:01:00 by rodrigo          ###   ########.fr        #
+#    Updated: 2025/01/08 21:04:41 by rodrigo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,16 @@ CFLAGS = -Wall -Wextra -Werror -g
 LIBFT_DIR = libft
 LIBFT = ./libft/libft.a
 RM = rm -rf
-SRCS = stack_utils.c stack_utils2.c stack_utils3.c stack_actions.c stack_sort.c push_swap.c
+
+SRCS = push_swap.c \
+       stack_operations.c \
+       sort_tiny.c \
+       bucket_sort.c \
+       stack_init.c \
+       stack_init_utils.c \
+       stack_validation.c \
+       stack_helpers.c
+
 SRC = $(addprefix ./src/,$(SRCS))
 OBJ = $(SRC:.c=.o)
 INC = -I./inc
@@ -30,7 +39,7 @@ $(LIBFT):
 $(NAME): $(LIBFT) $(OBJ)
 	@echo "\033[1;32mCompiling Push Swap...\033[0m"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L./$(LIBFT_DIR) -lft
-		@echo "\033[1;36m              _____ _______             \033[0m"
+	@echo "\033[1;36m              _____ _______             \033[0m"
 	@echo "\033[1;36m             |  __ \\__   __|            \033[0m"
 	@echo "\033[1;36m             | |__) | | |               \033[0m"
 	@echo "\033[1;36m             |  _  /  | |               \033[0m"
@@ -56,20 +65,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
-OS = $(shell uname)
-
-size ?= 10
-
-ifeq ($(OS),Linux)
-CHECKER = valgrind ./push_swap $(ARG) | ./checker_linux $(ARG)
-else
-CHECKER = ./push_swap $(ARG) | ./checker_Mac $(ARG)
-endif
-
-test:
-	@$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
-	@echo "Checker result: "
-	$(CHECKER)
-	@echo "Instructions count: "
-	@./push_swap $(ARG) | wc -l

@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:01 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/06 23:12:42 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/08 20:32:31 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,72 +58,37 @@ static int	is_valid_number(char *str)
 	return (1);
 }
 
-void	process_arguments(int count, char **args)
+static void	check_arg(char *arg)
 {
-	int	i;
 	int	j;
 	int	found_num;
 
+	j = 0;
+	found_num = 0;
+	while (arg[j])
+	{
+		while (arg[j] == ' ' || arg[j] == '\t')
+			j++;
+		if (arg[j])
+		{
+			if (!is_valid_number(arg + j))
+				cleanup_and_exit(NULL, "Error\n", 1);
+			found_num = 1;
+			while (arg[j] && arg[j] != ' ' && arg[j] != '\t')
+				j++;
+		}
+	}
+	if (!found_num)
+		cleanup_and_exit(NULL, "Error\n", 1);
+}
+
+static void	process_arguments(int count, char **args)
+{
+	int	i;
+
 	i = 1;
 	while (i < count)
-	{
-		j = 0;
-		found_num = 0;
-		while (args[i][j])
-		{
-			while (args[i][j] == ' ' || args[i][j] == '\t')
-				j++;
-			if (args[i][j])
-			{
-				if (!is_valid_number(args[i] + j))
-					cleanup_and_exit(NULL, "Error\n", 1);
-				found_num = 1;
-				while (args[i][j] && args[i][j] != ' ' && args[i][j] != '\t')
-					j++;
-			}
-		}
-		if (!found_num)
-			cleanup_and_exit(NULL, "Error\n", 1);
-		i++;
-	}
-}
-
-static void	join_args(char **args, int i, t_stacks *data)
-{
-	char	*temp;
-	char	*result;
-
-	result = ft_strdup("");
-	while (args[i])
-	{
-		temp = ft_strjoin(result, args[i]);
-		free(result);
-		if (args[i + 1])
-		{
-			result = ft_strjoin(temp, " ");
-			free(temp);
-		}
-		else
-			result = temp;
-		i++;
-	}
-	data->join_args = result;
-	if (!data->join_args)
-		cleanup_and_exit(data, "Error\n", 1);
-}
-
-static void	handle_sorting(t_stacks *data)
-{
-	if (is_stack_sorted(data))
-		cleanup_and_exit(data, NULL, 0);
-	else if (data->a_size == 2)
-		swap_elements("sa", data->a, data->a_size);
-	else if (data->a_size == 3)
-		sort_three_elements(data);
-	else if (data->a_size <= 5)
-		sort_small_stack(data);
-	else
-		sort_large_stack(data);
+		check_arg(args[i++]);
 }
 
 int	main(int argc, char **argv)
@@ -142,4 +107,4 @@ int	main(int argc, char **argv)
 	handle_sorting(data);
 	cleanup_and_exit(data, NULL, 0);
 	return (0);
-} 
+}
