@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:26 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/08 20:25:50 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/09 21:02:30 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		bucket_sort(t_stacks *data);
 int			get_min_position(int *stack, int size);
 int			get_max_position(int *stack, int size);
 void		rotate_to_position(t_stacks *data, int pos);
-int			get_target_pos(t_stacks *data, int num);
 void		move_forward(int *array, int count);
 void		move_backward(int *array, int count);
 int			get_min_value(int *stack, int size);

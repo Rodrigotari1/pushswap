@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:18 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/08 20:32:39 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/09 21:02:24 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,6 @@ void	rotate_to_position(t_stacks *data, int pos)
 	else
 		while (pos++ < data->a_size)
 			rotate_stack(data->a, data->a_size, "down", "a");
-}
-
-int	get_target_pos(t_stacks *data, int num)
-{
-	int	i;
-	int	target_pos;
-	int	closest_bigger;
-
-	i = 0;
-	target_pos = 0;
-	closest_bigger = 2147483647;
-	while (i < data->a_size)
-	{
-		if (data->a[i] > num && data->a[i] < closest_bigger)
-		{
-			closest_bigger = data->a[i];
-			target_pos = i;
-		}
-		i++;
-	}
-	if (closest_bigger == 2147483647)
-		return (get_min_position(data->a, data->a_size));
-	return (target_pos);
 }
 
 void	move_forward(int *array, int count)
