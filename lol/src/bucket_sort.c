@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:01:39 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/09 21:46:25 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:47:19 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,11 @@ static void	divide_into_sorted_chunks(t_stacks *data)
 	while (data->a_size > 0)
 	{
 		pushed = 0;
-		while (pushed++ < chunk_size && data->a_size > 0)
+		while (pushed < chunk_size && data->a_size > 0)
+		{
 			process_chunk(data, chunk, chunk_size);
+			pushed++;
+		}
 		chunk++;
 	}
 }

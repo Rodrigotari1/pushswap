@@ -6,12 +6,19 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:18 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/08 20:33:03 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:44:22 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 #include <limits.h>
+
+static void	check_limits(long num, int sign, t_stacks *data)
+{
+	if ((sign == 1 && num > INT_MAX)
+		|| (sign == -1 && num * sign < INT_MIN))
+		cleanup_and_exit(data, "Error\n", 1);
+}
 
 int	string_to_int(const char *str, t_stacks *data)
 {
@@ -22,20 +29,24 @@ int	string_to_int(const char *str, t_stacks *data)
 	num = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
 			sign = -1;
+		i++;
+	}
+	if (!str[i])
+		cleanup_and_exit(data, "Error\n", 1);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
 			cleanup_and_exit(data, "Error\n", 1);
 		num = num * 10 + (str[i++] - '0');
-		if ((num * sign) > INT_MAX || (num * sign) < INT_MIN)
-			cleanup_and_exit(data, "Error\n", 1);
+		check_limits(num, sign, data);
 	}
-	return ((int)(num * sign));
+	return (num * sign);
 }
 
 int	is_stack_sorted(t_stacks *data)

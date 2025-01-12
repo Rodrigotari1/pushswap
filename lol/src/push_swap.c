@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:01 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/09 21:25:29 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:33:35 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	is_valid_number(char *str)
 	if (!str[i])
 		return (0);
 	len = 0;
-	while (str[i])
+	while (str[i] && str[i] != ' ' && str[i] != '\t')
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '\t')
+		if (!ft_isdigit(str[i]))
 			return (0);
 		if (ft_isdigit(str[i]))
 			has_digit = 1;
@@ -85,10 +85,21 @@ static void	check_arg(char *arg)
 static void	process_arguments(int count, char **args)
 {
 	int	i;
+	int	word_count;
 
 	i = 1;
-	while (i < count)
-		check_arg(args[i++]);
+	if (count == 2)
+	{
+		word_count = count_words(args[1], ' ');
+		if (word_count == 0)
+			cleanup_and_exit(NULL, "Error\n", 1);
+		check_arg(args[1]);
+	}
+	else
+	{
+		while (i < count)
+			check_arg(args[i++]);
+	}
 }
 
 int	main(int argc, char **argv)

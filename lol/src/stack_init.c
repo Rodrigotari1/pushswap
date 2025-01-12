@@ -6,7 +6,7 @@
 /*   By: rodrigo <rodrigo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:02:18 by rodrigo           #+#    #+#             */
-/*   Updated: 2025/01/09 21:26:36 by rodrigo          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:43:26 by rodrigo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,16 @@ int	count_words(const char *str, char delimiter)
 
 void	initialize_stacks(int count, char **args, t_stacks *data)
 {
-	int	i;
 	int	num_count;
 
-	i = 0;
 	num_count = 0;
-	while (--count)
+	if (count == 2)
 	{
-		if (count_words(args[i + 1], ' '))
-			num_count += count_words(args[i + 1], ' ');
-		else
-			num_count++;
-		i++;
+		num_count = count_words(args[1], ' ');
+	}
+	else
+	{
+		num_count = count - 1;
 	}
 	data->a = malloc(num_count * sizeof(int));
 	data->b = malloc(num_count * sizeof(int));
